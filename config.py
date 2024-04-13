@@ -2,48 +2,28 @@ from libqtile import bar, layout, qtile, widget
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
 
-# Variables such as term and mod
-from settings.vars import mod, terminal
+# groups
+from settings.groups import groups
 
 # keybindings
 from settings.keybindings import keys
 
-# groups
-from settings.groups import groups
+# Variables such as term and mod
+from settings.vars import mod, terminal
+
+# Layouts
+from settings.layouts import layouts
+
+# Color theme
+from theme.colors import catppuccin_mocha
+
+# Mouse
+from settings.mouse import mouse
 
 
-# Add key bindings to switch VTs in Wayland.
-# We can't check qtile.core.name in default config as it is loaded before qtile is started
-# We therefore defer the check until the key binding is run by using .when(func=...)
-# for vt in range(1, 8):
-#     keys.append(
-#         Key(
-#             ["control", "mod1"],
-#             f"f{vt}",
-#             lazy.core.change_vt(vt).when(func=lambda: qtile.core.name == "wayland"),
-#             desc=f"Switch to VT{vt}",
-#         )
-#     )
-
-# TODO Make this this one file
-layouts = [
-    layout.Columns(border_focus_stack=["#d75f5f", "#8f3d3d"], border_width=4),
-    layout.Max(),
-    # Try more layouts by unleashing below layouts.
-    # layout.Stack(num_stacks=2),
-    # layout.Bsp(),
-    # layout.Matrix(),
-    # layout.MonadTall(),
-    # layout.MonadWide(),
-    layout.RatioTile(),
-    # layout.Tile(),
-    layout.TreeTab(),
-    # layout.VerticalTile(),
-    # layout.Zoomy(),
-]
-
+# TODO start widget
 widget_defaults = dict(
-    font="JetBrainsMono Nerd Font Regular",
+    font="JetBrainsMono Nerd Font Mono Regular",
     fontsize=12,
     padding=3,
 )
@@ -80,18 +60,6 @@ screens = [
         # This variable is set to None (no cap) by default, but you can set it to 60 to indicate that you limit it to 60 events per second
         # x11_drag_polling_rate = 60,
     ),
-]
-
-# Drag floating layouts.
-mouse = [
-    Drag(
-        [mod],
-        "Button1",
-        lazy.window.set_position_floating(),
-        start=lazy.window.get_position(),
-    ),
-    Drag([mod], "Button3", lazy.window.set_size_floating(), start=lazy.window.get_size()),
-    Click([mod], "Button2", lazy.window.bring_to_front()),
 ]
 
 dgroups_key_binder = None

@@ -1,7 +1,7 @@
 from libqtile.config import Key
 from libqtile.lazy import lazy
-from settings.vars import mod, terminal
 
+from settings.vars import mod, terminal
 
 # A list of available commands that can be bound to keys can be found
 # at https://docs.qtile.org/en/latest/manual/config/lazy.html
