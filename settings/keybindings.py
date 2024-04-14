@@ -1,7 +1,7 @@
 from libqtile.config import Key
 from libqtile.lazy import lazy
 
-from settings.vars import mod, terminal
+from settings.vars import browser, mod, terminal
 
 # A list of available commands that can be bound to keys can be found
 # at https://docs.qtile.org/en/latest/manual/config/lazy.html
@@ -15,7 +15,7 @@ keys = [
     Key([mod], "l", lazy.layout.right(), desc="Move focus to right"),
     Key([mod], "j", lazy.layout.down(), desc="Move focus down"),
     Key([mod], "k", lazy.layout.up(), desc="Move focus up"),
-    Key([mod], "space", lazy.layout.next(), desc="Move window focus to other window"),
+    Key([mod], "n", lazy.layout.next(), desc="Move window focus to other window"),
     #
     # Move the position of the windows in the stack
     #
@@ -30,11 +30,11 @@ keys = [
     Key([mod, "control"], "l", lazy.layout.grow_right(), desc="Grow window to the right"),
     Key([mod, "control"], "j", lazy.layout.grow_down(), desc="Grow window down"),
     Key([mod, "control"], "k", lazy.layout.grow_up(), desc="Grow window up"),
-    Key([mod], "n", lazy.layout.normalize(), desc="Reset all window sizes"),
+    Key([mod, "control"], "n", lazy.layout.normalize(), desc="Reset all window sizes"),
     #
     # Layout and Windoe Layouts
     #
-    Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),  # TODO CHECK
+    Key([mod], "Space", lazy.next_layout(), desc="Toggle between layouts"),  # TODO CHECK
     Key([mod], "f", lazy.window.toggle_fullscreen(), desc="Toggle fullscreen on the focused window"),
     Key([mod], "t", lazy.window.toggle_floating(), desc="Toggle floating on the focused window"),
     #
@@ -42,7 +42,9 @@ keys = [
     #
     Key([mod], "c", lazy.window.kill(), desc="Kill focused window"),
     Key([mod], "x", lazy.window.kill(), desc="Kill focused window"),
-    Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),  # TODO ADD ROFI
+    Key([mod], "r", lazy.spawn("rofi -show drun"), desc="Spawn a command using a prompt widget"),
+    Key([mod], "Tab", lazy.spawn("rofi -show window")),
+    Key([mod], "b", lazy.spawn(browser), desc="Spawn a command using a prompt widget"),
     Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
     #
     # Qtile
