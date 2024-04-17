@@ -1,4 +1,5 @@
 from libqtile import widget
+
 from settings.vars import colors
 
 font_default = {
@@ -75,6 +76,10 @@ def ConfigTextBox(text, color):
     )
 
 
+def ConfigSpacer(lenght):
+    return widget.Spacer(lenght=lenght)
+
+
 def ConfigClock():
     return widget.Clock(
         foreground=colors[1],
@@ -89,6 +94,49 @@ def ConfigClock():
     )
 
 
+def ConfigCPU():
+    return widget.CPU(format="▓  Cpu: {load_percent}%", foreground=colors[4], **font_default)
+
+
+def ConfigMemory():
+    return widget.Memory(
+        foreground=colors[9],
+        # mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(myTerm + ' -e htop')},
+        format="{MemUsed: .0f}{mm}",
+        fmt="🖥  Mem: {}",
+        **font_default,
+    )
+
+
+def ConfigDisk():
+    return widget.DF(
+        update_interval=60,
+        foreground=colors[5],
+        # mouse_callbacks={"Button1": lambda: qtile.cmd_spawn(myTerm + " -e df")},
+        partition="/",
+        # format = '[{p}] {uf}{m} ({r:.0f}%)',
+        format="{uf}{m}",
+        fmt=" Disk: {}",
+        visible_on_warn=False,
+        **font_default,
+    )
+
+
+def ConfigVolume():
+    return widget.Volume(
+        foreground=colors[7],
+        fmt=" Vol: {}",
+        **font_default,
+    )
+
+
+def ConfigKeyBoard():
+    return widget.KeyboardLayout(
+        foreground=colors[4],
+        fmt="⌨  Kbd: {}",
+    )
+
+
 widget_defaults = dict(font="JetBrainsMono Nerd Font Mono Regular", fontsize=16, padding=0, background=colors[0])
 extension_defaults = widget_defaults.copy()
 
@@ -100,10 +148,15 @@ default_widgets = [
     ConfigTextBox("|", colors[8]),
     # ConfigPrompt(),
     ConfigWindowName(),
-    widget.TextBox("Press &lt;M-r&gt; to spawn", foreground=colors[7], **widget_defaults),
-    widget.Systray(**widget_defaults),
+    ConfigCPU(),
+    ConfigMemory(),
+    ConfigDisk(),
+    ConfigVolume(),
+    ConfigKeyBoard(),
+    # widget.TextBox("Press &lt;M-r&gt; to spawn", foreground=colors[7], **widget_defaults),
+    # widget.Systray(**widget_defaults),
     ConfigClock(),
-    widget.QuickExit(**widget_defaults),
+    widget.QuickExit(**widget_defaults, foreground=colors[3]),
     # TODO MEMORY CPU
     # TODO WIFI
 ]

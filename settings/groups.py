@@ -1,5 +1,6 @@
 from libqtile.command import lazy
 from libqtile.config import Group, Key
+
 from settings.keybindings import keys, mod
 
 # TODO MAKE THE DICT BE THE CONFIG AND MAKE THE FUCKING THING WORK
@@ -18,8 +19,8 @@ group_definition = [
     {"label": "  ", "name": 1, "layout": default_layout},  #     
     {"label": " 󰊯 ", "name": 2, "layout": default_layout},
     {"label": "  ", "name": 3, "layout": equal_split_layout},
-    {"label": " 󰝚 ", "name": 4, "layout": default_layout},
-    {"label": " 󰙯 ", "name": 5, "layout": full_screen_layout},  # 󰭹 Option
+    {"label": " 󰙯 ", "name": 4, "layout": full_screen_layout},  # 󰭹 Option
+    {"label": " 󰝚 ", "name": 5, "layout": default_layout},
     {"label": " 󰨞 ", "name": 6, "layout": default_layout},  # 󰨞  
     {"label": "  ", "name": 7, "layout": default_layout},
     {"label": "  ", "name": 8, "layout": full_screen_layout},

@@ -1,6 +1,7 @@
-from libqtile import bar, layout, qtile, widget
-from libqtile.config import Click, Drag, Group, Key, Match, Screen
-from libqtile.lazy import lazy
+import os
+import subprocess
+
+from libqtile import hook
 
 # groups
 from settings.groups import groups
@@ -8,27 +9,33 @@ from settings.groups import groups
 # keybindings
 from settings.keybindings import keys
 
+# Layouts
+from settings.layouts import floating_layout, layouts
+
+# Mouse
+from settings.mouse import mouse
+from settings.screens import screens
+
 # Variables such as term and mod
 from settings.vars import mod, terminal
-
-# Layouts
-from settings.layouts import layouts, floating_layout
+from settings.widgets import default_widgets
 
 # Color theme
 from theme.colors import catppuccin_mocha
 
-# Mouse
-from settings.mouse import mouse
-
-
 # TODO ADD ROFI INSTALL SCRIPT
 # MAKE GROUPS BETTER
+# Improve floating layouts
+# Improve widgets
 
-# TODO start widget
 
-from settings.screens import screens
-from settings.widgets import default_widgets
+@hook.subscribe.startup_once
+def start_once():
+    home = os.path.expanduser("~")
+    subprocess.call([home + "/.config/qtile/autostart.sh"])
 
+
+start_once()
 
 dgroups_key_binder = None
 dgroups_app_rules = []  # type: list
